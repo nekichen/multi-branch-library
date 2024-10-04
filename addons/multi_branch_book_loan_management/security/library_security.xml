@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <!-- Record Rule Library Loan -->
+        <record id="library_loan_record_rule" model="ir.rule">
+            <field name="name">Library Loan: Branch Access</field>
+            <field name="model_id" ref="model_library_loan"/>
+            <field name="domain_force">[('branch_id', 'in', user.company_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('multi_branch_library_management.group_library_user'))]"/>
+        </record>
+    </data>
+</odoo>

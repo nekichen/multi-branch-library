@@ -1,0 +1,74 @@
+<odoo>
+    <template id="report_library_book">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="book">
+                <div class="page">
+                    <h2>Library Book Report</h2>
+                    <p>
+                        <strong>Title: </strong>
+                        <span t-field="book.name"/>
+                    </p>
+                    <p>
+                        <strong>Date Release: </strong>
+                        <span t-field="book.date_release"/>
+                    </p>
+                    <p>
+                        <strong>Author/s: </strong>
+                        <span t-esc="' '.join([author.name for author in book.author_ids])"/>
+                    </p>
+                    <p>
+                        <strong>Category: </strong>
+                        <span t-field="book.category_id.name"/>
+                    </p>
+                    <p>
+                        <strong>Description: </strong>
+                        <span t-field="book.description"/>
+                    </p>
+                    <p>
+                        <strong>Total Copies: </strong>
+                        <span t-field="book.total_copies"/>
+                    </p>
+                    <p>
+                        <strong>Available Copies: </strong>
+                        <span t-field="book.available_copies"/>
+                    </p>
+                    <p>
+                        <strong>Total Borrows: </strong>
+                        <span t-field="book.total_borrows"/>
+                    </p>
+
+                    <table class="table" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+                                <th style="padding: 8px; border: 1px solid #ddd;">Borrower</th>
+                                <th style="padding: 8px; border: 1px solid #ddd;">Loan Date</th>
+                                <th style="padding: 8px; border: 1px solid #ddd;">Return Date</th>
+                                <th style="padding: 8px; border: 1px solid #ddd;">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="book.loan_ids" t-as="loan">
+                                <t t-if="loan.state != 'draft'">
+                                    <tr style="border-bottom: 1px solid #ddd;">
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
+                                            <span t-field="loan.borrower_id.name"/>
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
+                                            <span t-field="loan.loan_date"/>
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
+                                            <span t-field="loan.return_date"/>
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
+                                            <span t-field="loan.state"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

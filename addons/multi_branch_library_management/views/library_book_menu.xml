@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <!-- Parent Menu -->
+        <menuitem id="menu_library_management_root" name="Library Management" sequence="100"/>
+
+        <!-- Define actions for categories -->
+        <record id="action_library_book_categories" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">library.book.category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first library book's category 
+                </p>
+            </field>
+        </record>
+
+        <!-- Sub-menu for categories -->
+        <menuitem id="menu_library_book_categories" name="Categories" parent="menu_library_management_root" action="action_library_book_categories" sequence="30"/>
+
+        <!-- Define actions for books -->
+        <record id="action_library_book" model="ir.actions.act_window">
+            <field name="name">Library Books</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create your first library book
+                </p>
+            </field>
+        </record>
+
+        <!-- Sub-menu for books -->
+        <menuitem id="menu_library_book" name="Books" parent="menu_library_management_root" action="action_library_book" sequence="20"/>
+    </data>
+</odoo>

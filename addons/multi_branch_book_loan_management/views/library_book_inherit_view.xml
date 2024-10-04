@@ -1,0 +1,47 @@
+<odoo>
+    <!-- Inheritance for the Library Book Form View -->
+    <record id="view_inherited_library_book_form" model="ir.ui.view">
+        <field name="name">inherited.library.book.form</field>
+        <field name="model">library.book</field>
+        <field name="inherit_id" ref="multi_branch_library_management.view_library_book_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="after">
+                <field name="total_copies"/>
+                <field name="available_copies" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inheritance for the Library Book Tree View -->
+    <record id="view_inherited_library_book_tree" model="ir.ui.view">
+        <field name="name">inherited.library.book.tree</field>
+        <field name="model">library.book</field>
+        <field name="inherit_id" ref="multi_branch_library_management.view_library_book_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='branch_id']" position="after">
+                <field name="total_copies" />
+                <field name="available_copies" />
+                <field name="total_borrows" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inheritance for the Library Book Kanban View -->
+    <record id="view_inherited_library_book_kanban" model="ir.ui.view">
+        <field name="name">inherited.library.book.kanban</field>
+        <field name="model">library.book</field>
+        <field name="inherit_id" ref="multi_branch_library_management.view_library_book_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="available_copies" />
+            </xpath>
+
+            <xpath expr="//div[@class='oe_kanban_details']" position="inside">
+                <div>
+                    <span>Available Copies: </span>
+                    <t t-esc="record.available_copies.value or 0" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

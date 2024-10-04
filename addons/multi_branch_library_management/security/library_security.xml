@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <!-- Library User Group -->
+        <record id="group_library_user" model="res.groups">
+            <field name="name">Library User</field>
+            <field name="category_id" ref="base.module_category_hidden"/> <!-- or create your own category -->
+        </record>
+
+        <!-- Library Admin Group -->
+        <record id="group_library_admin" model="res.groups">
+            <field name="name">Library Administrator</field>
+            <field name="category_id" ref="base.module_category_hidden"/> <!-- or create your own category -->
+        </record>
+
+        <!-- Record Rule Library Book -->
+        <record id="library_book_record_rule" model="ir.rule">
+            <field name="name">Library Book: Branch Access</field>
+            <field name="model_id" ref="model_library_book"/>
+            <field name="domain_force">[('branch_id', 'in', user.company_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('multi_branch_library_management.group_library_user'))]"/>
+        </record>
+
+        <!-- Library User Access Control List -->
+        <record id="library_book_acl_user" model="ir.model.access">
+            <field name="name">Library Book User Access</field>
+            <field name="model_id" ref="model_library_book"/>
+            <field name="group_id" ref="multi_branch_library_management.group_library_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <!-- Admin Access Control List -->
+        <record id="library_book_acl_admin" model="ir.model.access">
+            <field name="name">Library Book Admin Access</field>
+            <field name="model_id" ref="model_library_book"/>
+            <field name="group_id" ref="multi_branch_library_management.group_library_admin"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+    </data>
+</odoo>

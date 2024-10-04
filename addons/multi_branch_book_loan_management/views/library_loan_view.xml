@@ -1,0 +1,70 @@
+<odoo>
+    <!-- Form view for Library Loan -->
+    <record id="view_library_loan_form" model="ir.ui.view">
+        <field name="name">library.loan.form</field>
+        <field name="model">library.loan</field>
+        <field name="arch" type="xml">
+            <form string="Library Loans">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,borrowed,returned" />
+                    <button name="action_borrow" string="Borrow" type="object" states="draft" class="btn-primary" />
+                    <button name="action_return" string="Return" type="object" states="borrowed" class="btn-secondary" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="book_id" />
+                        <field name="borrower_id" />
+                    </group>
+                    <group>
+                        <field name="loan_date" />
+                        <field name="return_date" />
+                        <field name="branch_id" invisible="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view for Library Loan -->
+    <record id="view_library_loan_tree" model="ir.ui.view">
+        <field name="name">library.loan.tree</field>
+        <field name="model">library.loan</field>
+        <field name="arch" type="xml">
+            <tree string="Library Loans">
+                <field name="book_id" />
+                <field name="borrower_id" />
+                <field name="loan_date" />
+                <field name="return_date" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_library_loan_search_wizard" model="ir.ui.view">
+        <field name="name">library.loan.search.wizard.form</field>
+        <field name="model">library.loan.search.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Search Library Loans">
+                <group>
+                    <field name="branch_ids" widget="many2many_tags"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <footer>
+                    <button string="Search" type="object" name="search_loans" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_library_loan_search_wizard" model="ir.actions.act_window">
+        <field name="name">Search Library Loans</field>
+        <field name="res_model">library.loan.search.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Wizard menu -->
+    <menuitem id="menu_library_loan_search_wizard" name="Search Library Loans" parent="menu_library_loan" action="action_library_loan_search_wizard" sequence="30" />
+</odoo>

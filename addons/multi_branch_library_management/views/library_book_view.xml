@@ -1,0 +1,101 @@
+<odoo>
+    <record id="view_library_book_category_form" model="ir.ui.view">
+        <field name="name">library.book.category.form</field>
+        <field name="model">library.book.category</field>
+        <field name="arch" type="xml">
+            <form string="Library Book Category">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_library_book_category_tree" model="ir.ui.view">
+        <field name="name">library.book.category.tree</field>
+        <field name="model">library.book.category</field>
+        <field name="arch" type="xml">
+            <tree string="Library Book Category">
+                <field name="name" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_library_book_form" model="ir.ui.view">
+        <field name="name">library.book.form</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date_release"/>
+                        <field name="author_ids" widget="many2many_tags"/>
+                        <field name="category_id"/>
+                        <field name="branch_id"/>
+                        <field name="description"/>
+                        <field name="attachment" filename="attachment_name" widget="image"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_library_book_tree" model="ir.ui.view">
+        <field name="name">library.book.tree</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree string="Library Book">
+                <field name="attachment" widget="image" options="{'size': (45, 60)}" />
+                <field name="name" />
+                <field name="date_release" />
+                <field name="author_ids" widget="many2many_tags" />
+                <field name="category_id" />
+                <field name="branch_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_library_book_kanban" model="ir.ui.view">
+        <field name="name">library.book.kanban</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <kanban string="Library Book">
+                <field name="name" />
+                <field name="date_release" />
+                <field name="author_ids" />
+                <field name="category_id" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_record" style="display: flex;">
+                            <div class="o_kanban_image_container">
+                                <field name="attachment" widget="image" style="max-width: 150px; max-height: 150px; margin: 5px;" />
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <t t-esc="record.name.value or 'No Name'" />
+                                </strong>
+                                <div>
+                                    <span>Release Date: </span>
+                                    <t t-esc="record.date_release.value or 'N/A'" />
+                                </div>
+                                <div>
+                                    <span>Author/s: </span>
+                                    <t t-esc="record.author_ids.value or 'N/A'" />
+                                </div>
+                                <div>
+                                    <span>Category: </span>
+                                    <t t-esc="record.category_id.value or 'Uncategorized'" />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

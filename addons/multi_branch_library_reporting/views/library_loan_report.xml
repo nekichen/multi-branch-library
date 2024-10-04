@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_report_library_loan" model="ir.actions.report">
+        <field name="name">Library Loan Report</field>
+        <field name="model">library.loan</field>
+        <field name="report_name">multi_branch_library_reporting.report_library_loan</field>
+        <field name="report_type">qweb-pdf</field>
+
+        <!-- Ensure the binding model ID refers to the correct model -->
+        <field name="binding_model_id" ref="multi_branch_book_loan_management.model_library_loan" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_library_report,access.library.report,model_library_report,,1,1,1,1
+access_library_report_wizard,access.library.report.wizard,model_library_report_wizard,,1,1,1,1

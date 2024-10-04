@@ -1,0 +1,71 @@
+<odoo>
+    <record id="view_library_report_wizard" model="ir.ui.view">
+        <field name="name">library.report.wizard.form</field>
+        <field name="model">library.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Library Report">
+                <group>
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <field name="book_ids" widget="many2many_tags"/>
+                    <field name="branch_ids" widget="many2many_tags"/>
+                </group>
+                <footer>
+                    <button string="Generate Report" type="object" name="action_generate_report" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_library_report_tree" model="ir.ui.view">
+        <field name="name">library.report.tree</field>
+        <field name="model">library.report</field>
+        <field name="arch" type="xml">
+            <tree string="Library Reports">
+                <field name="name"/>
+                <field name="branch_id"/>
+                <field name="total_books"/>
+                <field name="total_loans"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_library_report_form" model="ir.ui.view">
+        <field name="name">library.report.form</field>
+        <field name="model">library.report</field>
+        <field name="arch" type="xml">
+            <form string="Library Report">
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="total_books" readonly="1"/>
+                        <field name="total_loans" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_library_report_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Library Report</field>
+        <field name="res_model">library.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field> <!-- If you want it as a modal -->
+    </record>    
+
+    <record id="action_library_reports" model="ir.actions.act_window">
+        <field name="name">Library Reports</field>
+        <field name="res_model">library.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>    
+
+    <!-- Reports Parent Menu -->
+    <menuitem id="menu_library_reports" name="Reports" parent="multi_branch_library_management.menu_library_management_root" sequence="50"/>
+
+    <!-- Submenu Items -->
+    <menuitem id="library_menu_report_wizard" name="Generate Library Report" parent="menu_library_reports" action="action_library_report_wizard" sequence="50"/>
+
+    <menuitem id="library_menu_reports" name="Library Reports" parent="menu_library_reports" action="action_library_reports" sequence="30"/>
+</odoo>
